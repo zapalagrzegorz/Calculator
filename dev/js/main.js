@@ -82,17 +82,21 @@ document.addEventListener('DOMContentLoaded', function () {
             while (this.stackOperatorsCalc.length) {
                 this.queueOutputCalc.push(this.stackOperatorsCalc.shift());
             }
+            
 
             // READ ELEMENTS
             //  redukuj elementy aż zostanie jeden
             let i = 0;
 
             while (this.queueOutputCalc.length !== 1) {
-                let token = this.queueOutputCalc[i];
+                if (this.queueOutputCalc.length === 2 && this.queueOutputCalc[1].match(/[+\-*\/]/)) {
+                    this.queueOutputCalc.pop();
+                }
+                const token = this.queueOutputCalc[i];
                 if (isNaN(token)) {
                     let result = 0;
-                    let firstNum = Number(this.queueOutputCalc[i - 2]);
-                    let secNum = Number(this.queueOutputCalc[i - 1]);
+                    const firstNum = Number(this.queueOutputCalc[i - 2]);
+                    const secNum = Number(this.queueOutputCalc[i - 1]);
 
                     switch (token) {
                     case '+':
@@ -216,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let islastNum = /\d+$/.test(screenTop.textContent);
             let islastSqrt = /sqrt\(\d+\)\s*$/.test(screenTop.textContent);
 
-            if (screenTop.textContent.charAt(0) === '0') {
+            if (screenTop.textContent.charAt(0) === '0' && screenTop.textContent.length === 1) {
                 screenTop.textContent = event.target.textContent;
                 screenBottom.textContent = event.target.textContent;
 

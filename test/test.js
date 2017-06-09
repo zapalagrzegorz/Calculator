@@ -16,7 +16,7 @@ function calculateExpression (expression) {
     stackOperatorsCalc.length = 0;
     tokens = expression.trim().split(/\s+/g);
 
-            // obsługa pierwiastka, podmien elementy typu sqrt(9) na 9, √ oraz ^2 na ^
+    // obsługa pierwiastka, podmien elementy typu sqrt(9) na 9, √ oraz ^2 na ^
     tokens.forEach((element, index) => {
         if (/sqrt\(\d+\)/.exec(element)) {
             let num = /\d+/.exec(element)[0];
@@ -48,11 +48,22 @@ function calculateExpression (expression) {
     while (stackOperatorsCalc.length) {
         queueOutputCalc.push(stackOperatorsCalc.shift());
     }
+    // jeżeli podano jako ostatni operator dwuargumentowy np. + - usuń go
+    // const lastElements = queueOutputCalc.slice(-2).join('');
+    // if (lastElements.match(/[+\-*\/^√][+\-*\/]/)) {
+    //     queueOutputCalc.pop();
+    // }
 
-// READ ELEMENTS
     let i = 0;
 
     while (queueOutputCalc.length !== 1) {
+
+        if (queueOutputCalc.length === 2) {
+            let lastChar = queueOutputCalc[1]; 
+            if (/[+\-*\/]/.test(lastChar)) {
+                queueOutputCalc.pop();
+            }
+        }
         let token = queueOutputCalc[i];
         if (isNaN(token)) {
             let result = 0;
@@ -80,7 +91,7 @@ function calculateExpression (expression) {
                 break;
             }
 
-        // aktualizacja tablicy
+            // aktualizacja tablicy
             switch (token) {
             case '+':
             case '-':
@@ -105,10 +116,15 @@ function calculateExpression (expression) {
 }
 
 QUnit.test('calculation test', function (assert) {
+    // priorytet działań
     assert.equal(calculateExpression('2 + 3'), 5);
     assert.equal(calculateExpression('2 + 3 * 4'), 14);
     assert.equal(calculateExpression('10 / 2 * 3'), 15);
     assert.equal(calculateExpression('6 + sqrt(9) * 3'), 15);
     assert.equal(calculateExpression('1000 - 1 * 2 + 3 / 4 - 5 ^2 * sqrt(9)'), '923.75');
-    assert.equal(calculateExpression ('8 + 2 /'), '4');
+    // pomijanie wadliwego inputu
+    assert.equal(calculateExpression('8 + 2 /'), '4');
+    assert.equal(calculateExpression('10 * sqrt(9) *'), '30');
+    // operacje ze startowym 0
+    assert.equal(calculateExpression('0 + 3'), '3');
 });

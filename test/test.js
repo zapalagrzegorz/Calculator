@@ -26,6 +26,15 @@ function calculateExpression (expression) {
         }
     });
 
+    if (tokens.length === 1) {
+        return;
+                // } else if (this.tokens.length === 2 && /[+\-*\/]/.test(this.tokens[1])) {
+                //     return;
+                // }
+    } else if ( (/[+\-*\/]/).test(tokens.slice(-1)) ) {
+        tokens.pop();
+    }
+
     tokens.forEach((element) => {
 
         if (isNaN(element)) {
@@ -81,6 +90,9 @@ function calculateExpression (expression) {
                 result = firstNum * secNum;
                 break;
             case '/':
+                if (firstNum === 0 && secNum === 0) {
+                    return 'error'; 
+                }
                 result = firstNum / secNum;
                 break;
             case '√':
@@ -123,8 +135,21 @@ QUnit.test('calculation test', function (assert) {
     assert.equal(calculateExpression('6 + sqrt(9) * 3'), 15);
     assert.equal(calculateExpression('1000 - 1 * 2 + 3 / 4 - 5 ^2 * sqrt(9)'), '923.75');
     // pomijanie wadliwego inputu
-    assert.equal(calculateExpression('8 + 2 /'), '4');
+    assert.equal(calculateExpression('5 +'), '5');
+    assert.equal(calculateExpression('5 -'), '5');
+    assert.equal(calculateExpression('5 *'), '5');
+    assert.equal(calculateExpression('5 /'), '5');
+    assert.equal(calculateExpression('8 + 2 +'), '10');
+    assert.equal(calculateExpression('8 + 2 -'), '10');
+    assert.equal(calculateExpression('8 + 2 *'), '10');
+    assert.equal(calculateExpression('8 + 2 /   '), '10');
     assert.equal(calculateExpression('10 * sqrt(9) *'), '30');
     // operacje ze startowym 0
     assert.equal(calculateExpression('0 + 3'), '3');
+    assert.equal(calculateExpression('0 - 3'), '-3');
+    assert.equal(calculateExpression('0 / 3'), '0');
+    assert.equal(calculateExpression('0 * 3'), '0');
+    // inne przypadki
+    assert.equal(calculateExpression('0 / 0'), 'error');
+    assert.equal(calculateExpression('1 + 2 + sqrt(27) - 9 * 0 / 0'), 'error');
 });

@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         * Sets result of top screen expression in bottom screen
         */
         parseExpression: function () {
-
+            
             // tokenizacja
             this.tokens.length = 0;
             this.queueOutputCalc.length = 0;
@@ -50,7 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.tokens.splice(index, 1, '^');
                 }
             });
-
+            // if (this.tokens.length < 3) {
+            if (this.tokens.length === 1) {
+                return;
+            } else if ( (/[+\-*\/]/).test(this.tokens.slice(-1)) ) {
+                this.tokens.pop();
+            }
             // ułożenie kolejności - tytułowy 'shunting'
             this.tokens.forEach((element) => {
 
@@ -89,9 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
             let i = 0;
 
             while (this.queueOutputCalc.length !== 1) {
-                if (this.queueOutputCalc.length === 2 && this.queueOutputCalc[1].match(/[+\-*\/]/)) {
-                    this.queueOutputCalc.pop();
-                }
+                // // obsługa osamotnionych operatorów dwuelementowych np. '1 +' 
+                // if (this.queueOutputCalc.length === 2 && this.queueOutputCalc[1].match(/[+\-*\/]/)) {
+                //     this.queueOutputCalc.pop();
+                // }
                 const token = this.queueOutputCalc[i];
                 if (isNaN(token)) {
                     let result = 0;
@@ -157,7 +163,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function setScreen (event) {
         //  pierwszy if zrobić na switch, bo będzie jeszcze =, C jak kasuj dane
 
-        if (event.target.textContent === 'C') {
+        if (event.target.className === 'col-sm-12 calcPanel') {
+            return;
+        } else if (event.target.textContent === 'C') {
             screenTop.textContent = '0';
             screenBottom.textContent = '0';
             return;
@@ -193,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     screenTop.textContent = screenTop.textContent.replace(lastChar, event.target.textContent + '2');
                     screenBottom.textContent = event.target.textContent + '2';
 
-                        // ostatnia jest liczba 
+                    // ostatnia jest liczba 
                 } else {
                     screenTop.textContent += ' ' + event.target.textContent + '2';
                     screenBottom.textContent = event.target.textContent + '2';
@@ -203,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case '√':
                     // obsługa pierwiastka - pierwiastkujemy po wpisaniu liczby
                 if (islastSqrt) {
-                        // nie ma pierwiastka z pierwiastka
+                    // nie ma pierwiastka z pierwiastka
                     return;
                 } else if (islastNum) {
                         // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator

@@ -117,7 +117,7 @@ function calculateExpression (expression) {
 
 QUnit.test('calculation test', function (assert) {
     // priorytet działań
-    assert.equal(calculateExpression('2 + 3'), 5);
+    assert.assert(calculateExpression('2 + 3') == 5, '2+3=5');
     assert.equal(calculateExpression('2 + 3 * 4'), 14);
     assert.equal(calculateExpression('10 / 2 * 3'), 15);
     assert.equal(calculateExpression('6 + sqrt(9) * 3'), 15);

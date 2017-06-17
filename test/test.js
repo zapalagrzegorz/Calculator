@@ -16,7 +16,6 @@ function calculateExpression (expression) {
     stackOperatorsCalc.length = 0;
     tokens = expression.trim().split(/\s+/g);
 
-    // obsługa pierwiastka, podmien elementy typu sqrt(9) na 9, √ oraz ^2 na ^
     tokens.forEach((element, index) => {
         if (/sqrt\(\d+\)/.exec(element)) {
             let num = /\d+/.exec(element)[0];
@@ -28,9 +27,6 @@ function calculateExpression (expression) {
 
     if (tokens.length === 1) {
         return;
-                // } else if (this.tokens.length === 2 && /[+\-*\/]/.test(this.tokens[1])) {
-                //     return;
-                // }
     } else if ( (/[+\-*\/]/).test(tokens.slice(-1)) ) {
         tokens.pop();
     }
@@ -57,11 +53,6 @@ function calculateExpression (expression) {
     while (stackOperatorsCalc.length) {
         queueOutputCalc.push(stackOperatorsCalc.shift());
     }
-    // jeżeli podano jako ostatni operator dwuargumentowy np. + - usuń go
-    // const lastElements = queueOutputCalc.slice(-2).join('');
-    // if (lastElements.match(/[+\-*\/^√][+\-*\/]/)) {
-    //     queueOutputCalc.pop();
-    // }
 
     let i = 0;
 
@@ -122,10 +113,10 @@ function calculateExpression (expression) {
         i++;
     }
     return queueOutputCalc[0];
-    // odczytanie
-    // screenBottom.textContent = String(queueOutputCalc[0]);
-    // screenTop.textContent = '';
 }
+
+
+
 
 QUnit.test('calculation test', function (assert) {
     // priorytet działań
@@ -152,4 +143,7 @@ QUnit.test('calculation test', function (assert) {
     // inne przypadki
     assert.equal(calculateExpression('0 / 0'), 'error');
     assert.equal(calculateExpression('1 + 2 + sqrt(27) - 9 * 0 / 0'), 'error');
+
+    // testy na obsługę keybord'u - czyli szablon HTML do obsługi 
+
 });

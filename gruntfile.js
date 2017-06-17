@@ -7,10 +7,10 @@ module.exports = function (grunt) {
 
     // Tablica zawierająca zewnętrzne javascripty, które chcemy konkatenować do vendor.js
     var vendorJs = [
-        'bower_components/jquery/dist/jquery.min.js',
-        'bower_components/tether/dist/js/tether.min.js',
-        'bower_components/bootstrap/js/dist/util.js',
-        'bower_components/bootstrap/js/dist/collapse.js'
+        // 'bower_components/jquery/dist/jquery.min.js',
+        // 'bower_components/tether/dist/js/tether.min.js',
+        // 'bower_components/bootstrap/js/dist/util.js',
+        // 'bower_components/bootstrap/js/dist/collapse.js'
     ];
     // Project configuration.
     grunt.initConfig({
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
             dev: {
                 files: {
                     'build/js/vendor.js': [vendorJs],
-                    'build/js/scripts.js': ['dev/js/main.js']
+                    'build/js/scripts.js': ['dev/js/*.js']
                 }
             }
         },

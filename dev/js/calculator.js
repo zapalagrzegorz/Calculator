@@ -158,8 +158,11 @@ const Calculator = (function () {
     let _setScreen = function (event) {
 
         // inicjalne sprawdzenie - inaczej reszta nie ma racji bytu
-        if (event.target !== undefined) {
-
+        // event === 'C' dla zdarzenia key 'C' pressed
+        if (event === 'C') {
+            screenTop.textContent = '0';
+            screenBottom.textContent = '0';
+        } else if (event.target !== undefined) {
             // kliknięto panel - przekazywany są wówczas wszystkie przyciski 
             if (event.target.className === 'col-sm-12 calcPanel') {
                 return;

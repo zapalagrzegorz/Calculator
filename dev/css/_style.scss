@@ -1,36 +1,115 @@
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .calculator {
-    h1 {
-        margin-top: 50%;
-        text-align: center;
-    }
-    p {
-        margin-left: 2rem;
-    }
+    max-width: 500px;
     .btn {
-        width: 42.91px;
+        width: 43px;
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
     }
-    p {
-        margin-left: 2rem;
+    .calcPanel {
+        position: relative;
+        margin-top: 1rem;
+        color: white;
+        .btn {
+            color: inherit;
+            transition: .4s;
+            &:active {
+                box-shadow: none;
+                transform: translateY(2px);
+            }
+        }
+        .calcBtnNum {
+            background-color: #b29571;
+            margin-bottom: 0.2rem;
+        }
+        .calcBtnClr {
+            background-color: indianred;
+        }
+        .calcBtnEq {
+            background-color: indigo;
+        }
+        .calcBtnOper {
+            background-color: #7971b2;
+        }
     }
     .screen {
+        margin-top: 1rem;
+        color: white;
         .screen__top,
         .screen__bottom {
             min-height: 2rem;
             border: 1px solid black;
         }
+        .screen__top {
+            color: inherit;
+            width: 90%;
+            top: 12px;
+            margin: auto;
+            border: 0;
+            font-size: 0.7rem;
+            line-height: 2;
+        }
+        .screen__bottom {
+            color: inherit;
+            width: 80%;
+            margin: auto;
+            border: 0;
+            line-height: 32px;
+        }
     }
 }
 
-@include media-breakpoint-up(xs) {
-    .calculator {
-        max-width: 500px;
+.calculator--traditional {
+    transition: 1s;
+    .screen {
+        position: static;
+        transition: 1s;
+    }
+    .calcPanel {
+        order: 1;
+        transition: 1s;
+    }
+    .changeViewBtn {
+        transition: 1s;
+        margin-top: .1rem;
+        background-image: url(../img/original.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 38px;
+        height: 38px;
+        background-position: -20px 0px;
     }
 }
 
-@include media-breakpoint-up(medium) {
-    .calculator {
-        max-width: 500px;
-        .calcBtnNum {
+.calculator--original {
+    transition: 1s;
+    &>.row {
+        position: relative;
+        min-height: 400px;
+        top: -55px;
+        transition: inherit;
+    }
+    .screen {
+        transition: inherit;
+        max-height: 82px;
+        overflow-y: auto;
+        position: absolute;
+        top: 48%;
+        left: 19%;
+        width: 60%;
+        margin: 0 auto;
+        border: 1px white solid;
+        border-radius: 35px;
+    }
+    .calcPanel {
+        .calcBtnNum,
+        .calcBtnOper,
+        .btn {
             position: absolute;
         }
         .calcBtnNum:nth-of-type(1) {
@@ -74,5 +153,53 @@
             right: 0;
             top: 180px;
         }
+        .calcBtnOper:nth-of-type(11) {
+            left: 0;
+            top: 222px;
+        }
+        .calcBtnOper:nth-of-type(12) {
+            top: 272px;
+            left: 83px;
+            left: calc(29.5px + 43px);
+        }
+        .calcBtnOper:nth-of-type(13) {
+            top: 300px;
+            left: calc(29.5px + 59px + 43px * 2);
+        }
+        .calcBtnOper:nth-of-type(14) {
+            position: absolute;
+            top: 300px;
+            left: calc(29.5px + 59px * 2 + 43px * 3);
+        }
+        .calcBtnOper:nth-of-type(15) {
+            top: 272px;
+            left: calc(29.5px + 59px * 3 + 43px * 4);
+        }
+        .calcBtnOper:nth-of-type(16) {
+            top: 222px;
+            left: 450px;
+        }
+        .calcBtnEq:nth-of-type(17) {
+            top: 253px;
+            left: 160px;
+            width: 80px;
+        }
+        .calcBtnClr:nth-of-type(18) {
+            top: 253px;
+            left: 250px;
+            width: 80px;
+        }
+    }
+    .changeViewBtn {
+        width: 70px;
+        height: 40px;
+        background-image: url(../img/traditional.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: -37px;
+        background-position-y: 0px;
+        position: absolute;
+        top: 330px;
+        left: 0;
     }
 }

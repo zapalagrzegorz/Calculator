@@ -17,19 +17,19 @@
     <link rel="stylesheet" href="build/css/main.css">
 </head>
 
-<body>
+<body style="background: #134E5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    "
+>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <section class="container calculator">
-        <!-- small only-->
-        <div class="row hidden-md-up">
-            <div class="col-sm-12 screen">
-                <div class="d-flex justify-content-end screen__top">0</div>
-                <div class="d-flex justify-content-end screen__bottom">0</div>
-            </div>
-            <div class="col-sm-12 calcPanel">
+    <section class="container calculator calculator--original">
+
+        <!-- medium and up-->
+        <div class="row">
+            <div class="col-sm-12 calcPanel" style="position: relative;">
                 <button href="#" class="btn calcBtnNum">1</button>
                 <button href="#" class="btn calcBtnNum">2</button>
                 <button href="#" class="btn calcBtnNum">3</button>
@@ -47,91 +47,15 @@
                 <button href="#" class="btn calcBtnOper">^</button>
                 <button href="#" class="btn calcBtnOper">√</button>
                 <button href="#" class="btn calcBtnEq">=</button>
-                <button href="#" id="calcBtnClr" class="btn">C</button>
+                <button href="#" class="btn calcBtnClr">C</button>
             </div>
-        </div>
-
-        <!-- medium and up-->
-        <div class="row hidden-md-down" style="
-    position: relative;
-    min-height: 400px;
-">
-            <div class="col-sm-12 calcPanel" style="
-    position: relative;
-">
-                <button href="#" class="btn calcBtnNum">1</button>
-                <button href="#" class="btn calcBtnNum">2</button>
-                <button href="#" class="btn calcBtnNum">3</button>
-                <button href="#" class="btn calcBtnNum">4</button>
-                <button href="#" class="btn calcBtnNum">5</button>
-                <button href="#" class="btn calcBtnNum">6</button>
-                <button href="#" class="btn calcBtnNum">7</button>
-                <button href="#" class="btn calcBtnNum">8</button>
-                <button href="#" class="btn calcBtnNum">9</button>
-                <button href="#" class="btn calcBtnNum">0</button>
-                <button href="#" class="btn calcBtnOper" >-</button>
-                <button href="#" class="btn calcBtnOper" style="
-    position: absolute;
-    top: 272px;
-    /* left: -29px; */
-    left: 83px;
-    left: calc(29.5px + 43px);
-">+</button>
-                <button href="#" class="btn calcBtnOper" style="
-    position: absolute;
-    top: 272px;
-    /* left: -29px; */
-    left: calc(29.5px + 43px + 59px + 43px);
-    leftcalc(29.5px + 43px);:
-    leftcalc(29.5px + 43px):
-">*</button>
-                <button href="#" class="btn calcBtnOper" style="
-    position: absolute;
-    top: 272px;
-    /* left: -29px; */
-    left: calc(166px + 83px);
-    /* left: calc(29.5px + 43px + 29.5px + 43px + 29.5px + 43px); */
-    left: calc(29.5px + 43px + 59px + 43px + 59px + 43px);
-">/</button>
-                <button href="#" class="btn calcBtnOper" style="
-    position: absolute;
-    top: 272px;
-    /* left: -29px; */
-    /* left: calc(166px + 83px + 83px + 29.5px + 43px ); */
-    left: calc(29.5px + 43px + 59px + 43px + 59px + 43px + 59px + 43px);
-">^</button>
-                <button href="#" class="btn calcBtnOper" style="
-    position: absolute;
-    /* top: 272px; */
-    /* left: -29px; */
-    /* left: calc(166px + 83px + 83px + 83px); */
-    /* right: 0; */
-    left: 450px;
-    top: 222px;
-">√</button>
-                <button href="#" class="btn calcBtnEq">=</button>
-                <button href="#" id="calcBtnClr" class="btn">C</button>
-            </div>
-            <div class="col-sm-12 screen" style="
-    position: absolute;
-    top: 43%;
-">
-                <div class="d-flex justify-content-end screen__top" style="
-    top: 12px;
-    width: 52%;
-    margin: auto;
-    border: 0;
-    font-size: 0.8rem;
-    line-height: 2;
-">0</div>
-                <div class="d-flex justify-content-end screen__bottom" style="
-    width: 50%;
-    margin: auto;
-    border: 1;
-">0</div>
+            <div class="col-sm-12 screen">
+                <div class="d-flex justify-content-end screen__top">0</div>
+                <div class="d-flex justify-content-center screen__bottom">0</div>
             </div>
 
         </div>
+        <button class="btn changeViewBtn" id="changeViewBtn"></button>
     </section>
 
     <script src="build/js/scripts5.js"></script>

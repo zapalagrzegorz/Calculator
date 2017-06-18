@@ -2,17 +2,14 @@
 // do the type check with jsDoc 
 'use strict';
 
-// TO DOs:
-// nie działa keypress "c" / "C"
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
     /************ ELEMENTY ******/
-    
+
     let calcPanel = document.querySelector('.calcPanel');
     let equalButton = document.querySelector('.calcBtnEq');
-
+    let changeViewButton = document.querySelector('.changeViewBtn');
 
     /************ ZDARZENIA ******/
 
@@ -80,5 +77,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-
+    changeViewButton.addEventListener('click',  () => {
+        let calculator = document.querySelector('.calculator');
+        calculator.classList.toggle('calculator--traditional');
+        calculator.classList.toggle('calculator--original');
+    });
 });

@@ -146,7 +146,7 @@ const Calculator = (function () {
 
         // odczytanie
         screenBottom.textContent = String(queueOutputCalc[0]);
-        screenTop.textContent = '';
+        screenTop.textContent = '0';
     };
 
     /**
@@ -164,7 +164,7 @@ const Calculator = (function () {
             screenBottom.textContent = '0';
         } else if (event.target !== undefined) {
             // kliknięto panel - przekazywany są wówczas wszystkie przyciski 
-            if (event.target.className === 'col-sm-12 calcPanel') {
+            if (event.target.classList.contains('calcPanel')) {
                 return;
             } else if (event.target.textContent === 'C') {
                 screenTop.textContent = '0';
@@ -172,10 +172,10 @@ const Calculator = (function () {
                 return;
             }
         }
+        let screenTopTextContent = screenTop.textContent;
+
         // dla keyboard events 'pressed key' wyczerpuje w się w wartosci event, a event.target jest undefined
         const input = event.target !== undefined ? event.target.textContent : event;
-
-        let screenTopTextContent = screenTop.textContent;
         const islastNum = /\d+$/.test(screenTopTextContent);
         const islastSqrt = /sqrt\(\d+\)\s*$/.test(screenTopTextContent);
 
@@ -208,11 +208,10 @@ const Calculator = (function () {
                     screenTop.textContent = screenTopTextContent.replace(lastChar, input + '2');
                     screenBottom.textContent = input + '2';
 
-                        // ostatnia jest liczba 
+                    // ostatnia jest liczba 
                 } else {
                     screenTop.textContent += ' ' + input + '2';
                     screenBottom.textContent = input + '2';
-                        // event.preventDefault();
                 }
                 break;
             case '√':
@@ -221,21 +220,21 @@ const Calculator = (function () {
                 if (islastSqrt) {
                     return;
 
-                        // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator
+                    // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator
                 } else if (islastNum) {
                     screenTop.textContent = screenTopTextContent.replace(/(\d+)$/, 'sqrt(' + '$1' + ') ');
                     return;
                 } else {
 
-                        // zamiana operatora i cyfry na pierwiastek; 
+                    // zamiana operatora i cyfry na pierwiastek; 
                     screenTop.textContent = screenTopTextContent.replace(/(\d+)\W+$/, 'sqrt(' + '$1' + ') ');
                 }
                 break;
             }
 
-            // wybrano cyfrę
+        // wybrano cyfrę
         } else {
-            // obsługa pierw
+            // obsługa pierwiastka
             if (screenTop.textContent.charAt(0) === '0' && screenTopTextContent.length === 1) {
                 screenTop.textContent = input;
                 screenBottom.textContent = input;

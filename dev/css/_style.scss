@@ -1,8 +1,9 @@
 html,
 body {
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
+    height: 100%;
+    background: #134E5E;
+    background: -webkit-linear-gradient(to bottom, #71B280, #134E5E);
+    background: linear-gradient(to bottom, #71B280, #134E5E);
 }
 
 .calculator {
@@ -10,6 +11,11 @@ body {
     .btn {
         width: 43px;
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+    }
+    .btn:focus {
+        outline-color: green;
+        outline-style: hidden;
+        outline-width: 1px;
     }
     .calcPanel {
         position: relative;

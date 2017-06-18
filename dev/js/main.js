@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     calcPanel.addEventListener('click', Calculator.setScreen, false);
 
     // .bind - pierwszy argument określa wyraźnie obiekt kontektu this dla funkcji/metody, kolejne określają argumentu
-    equalButton.addEventListener('click', Calculator.parseExpression.bind(Calculator));
+    equalButton.addEventListener('click', Calculator.parseExpression.bind(Calculator, true));
 
     // obsługa klawiatury
     document.onkeydown = function (e) {

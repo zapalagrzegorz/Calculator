@@ -4,13 +4,13 @@
 // do the type check with jsDoc 
 'use strict';
 const Calculator = (function () {
-    
+
     /*************ELEMENTY I ZMIENNE*** */
     /********************************** */
 
     let screenTop = document.querySelector('.screen__top');
     let screenBottom = document.querySelector('.screen__bottom');
-   
+
     // queue - FIFO
     let queueOutputCalc = [];
     // stack - FILO
@@ -26,7 +26,7 @@ const Calculator = (function () {
         '+': 2,
         '-': 2
     };
-    
+
 
     /*************METODY ************** */
     /********************************** */
@@ -37,7 +37,7 @@ const Calculator = (function () {
     * Memory of calculator performing parsing methods
     * Sets result of top screen expression in bottom screen
     */
-    let _parseExpression = function () {
+    let _parseExpression = function (isfinal = false) {
 
         // tokenizacja
         tokens.length = 0;
@@ -146,7 +146,9 @@ const Calculator = (function () {
 
         // odczytanie
         screenBottom.textContent = String(queueOutputCalc[0]);
-        screenTop.textContent = '0';
+        if (isfinal) {
+            screenTop.textContent = '0';
+        }
     };
 
     /**
@@ -176,8 +178,9 @@ const Calculator = (function () {
 
         // dla keyboard events 'pressed key' wyczerpuje w się w wartosci event, a event.target jest undefined
         const input = event.target !== undefined ? event.target.textContent : event;
-        const islastNum = /\d+$/.test(screenTopTextContent);
-        const islastSqrt = /sqrt\(\d+\)\s*$/.test(screenTopTextContent);
+        const isLastNum = /\d+$/.test(screenTopTextContent);
+        const isLastSqrt = /sqrt\(\d+\)\s*$/.test(screenTopTextContent);
+        const isLastPow = (/(\d+\s\^2)$/.test(screenTopTextContent));
 
         // not a digit
         if (!/[0-9]/.test(input)) {
@@ -190,11 +193,17 @@ const Calculator = (function () {
             case '/':
 
                     // ostatni jest operator i nie jest potęgowaniem/pierwiastkowaniem
-                if (!islastNum && !islastSqrt && lastChar !== '^') {
+                if (!isLastNum && !isLastSqrt && !isLastPow) {
                     screenTop.textContent = screenTopTextContent.replace(/.?$/, input);
                     screenBottom.textContent = input;
 
-                        // ostatnia jest liczba lub potęgowanie
+                    // ostatnie jest  potęgowanie
+                // } else if (isLastPow) {
+                //     screenTop.textContent = screenTop.textContent.replace(/(\d+)(\s\^2)$/, '$1 ' + input);
+
+                // ostatnia jest liczba lub potęgowanie/pierwiastkowanie
+                // potegowanie/pierwiastkowanie jest jednoargumentowe - po nim następuje od razu kolejny operator - stąd nie przewiduje się, aby
+                // można go było zmienić
                 } else {
                     screenTop.textContent += ' ' + input;
                     screenBottom.textContent = input;
@@ -202,50 +211,59 @@ const Calculator = (function () {
                 }
                 break;
             case '^':
-
-                    // ostatni jest operator 
-                if (!islastNum) {
+                    // po potędze nie ma podmiany na pierwiastek
+                if (isLastSqrt || /(sqrt\(\d+\)\s*\W)$/.test(screenTopTextContent)) {
+                    return;
+                    
+                // ostatni jest operator
+                } else if (!isLastNum) {
                     screenTop.textContent = screenTopTextContent.replace(lastChar, input + '2');
                     screenBottom.textContent = input + '2';
 
-                    // ostatnia jest liczba 
+                // ostatnia jest liczba 
                 } else {
                     screenTop.textContent += ' ' + input + '2';
                     screenBottom.textContent = input + '2';
                 }
                 break;
             case '√':
-
                     // nie ma pierwiastka z pierwiastka
-                if (islastSqrt) {
+                if (isLastSqrt ) {
                     return;
 
-                    // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator
-                } else if (islastNum) {
-                    screenTop.textContent = screenTopTextContent.replace(/(\d+)$/, 'sqrt(' + '$1' + ') ');
+                } else if (isLastPow || /(\d+\s\^2\s\W)$/.test(screenTopTextContent)) {
+                    // nie ma podmiany dla innych operatorów, to tutaj konsekwetnie też nie, 
+                    // nie można przy tym zmienić bo jest jednoargumentowy
                     return;
+                   
+
+
+                        // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator
+                } else if (isLastNum) {
+                    screenTop.textContent = screenTopTextContent.replace(/(\d+)$/, 'sqrt(' + '$1' + ') ');
+                    // return;
                 } else {
 
-                    // zamiana operatora i cyfry na pierwiastek; 
+                        // zamiana operatora i cyfry na pierwiastek; 
                     screenTop.textContent = screenTopTextContent.replace(/(\d+)\W+$/, 'sqrt(' + '$1' + ') ');
                 }
                 break;
             }
-
-        // wybrano cyfrę
         } else {
-            // obsługa pierwiastka
-            if (screenTop.textContent.charAt(0) === '0' && screenTopTextContent.length === 1) {
+            // wybrano cyfrę
+
+            // obsługa pierwiastka / potęgi
+            if (screenTop.textContent.charAt(0) === '0' && screenTopTextContent.length === 1 || isLastPow) {
                 screenTop.textContent = input;
                 screenBottom.textContent = input;
 
                 // jeśli ostatnio było pierwiastkowanie zamień operację na liczbę
-            } else if (islastSqrt) {
+            } else if (isLastSqrt) {
                 screenTop.textContent = screenTopTextContent.replace(/sqrt\(\d+\)\s*$/, input);
                 screenBottom.textContent = input;
 
                 // ostatnim symbolem jest operator
-            } else if (!islastNum) {
+            } else if (!isLastNum) {
                 screenTop.textContent += (' ' + input);
                 screenBottom.textContent = input;
 
@@ -260,12 +278,13 @@ const Calculator = (function () {
                 screenBottom.textContent += input;
             }
         }
+        _parseExpression();
     };
 
     /*********** API KALKULATORA  ***/
     /********************************/
     return {
-        setScreen : _setScreen,
-        parseExpression : _parseExpression
+        setScreen: _setScreen,
+        parseExpression: _parseExpression
     };
 })();

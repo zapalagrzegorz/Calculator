@@ -1,6 +1,5 @@
 
-// TO DO
-// różnica assert i equals
+
 
 function calculateExpression (expression) {
     let queueOutputCalc = [];
@@ -115,38 +114,40 @@ function calculateExpression (expression) {
         }
         i++;
     }
-    return queueOutputCalc[0];
+    return Number(queueOutputCalc[0]);
 }
 
 
 
 
 QUnit.test('calculation test', function (assert) {
-    // priorytet działań
-    assert.equal(calculateExpression('2 + 3'), 5);
-    assert.equal(calculateExpression('2 + 3 * 4'), 14);
-    assert.equal(calculateExpression('10 / 2 * 3'), 15);
-    assert.equal(calculateExpression('6 + sqrt(9) * 3'), 15);
-    assert.equal(calculateExpression('1000 - 1 * 2 + 3 / 4 - 5 ^2 * sqrt(9)'), '923.75');
-    // pomijanie wadliwego inputu
-    assert.equal(calculateExpression('5 +'), '5');
-    assert.equal(calculateExpression('5 -'), '5');
-    assert.equal(calculateExpression('5 *'), '5');
-    assert.equal(calculateExpression('5 /'), '5');
-    assert.equal(calculateExpression('8 + 2 +'), '10');
-    assert.equal(calculateExpression('8 + 2 -'), '10');
-    assert.equal(calculateExpression('8 + 2 *'), '10');
-    assert.equal(calculateExpression('8 + 2 /   '), '10');
-    assert.equal(calculateExpression('10 * sqrt(9) *'), '30');
-    // operacje ze startowym 0
-    assert.equal(calculateExpression('0 + 3'), '3');
-    assert.equal(calculateExpression('0 - 3'), '-3');
-    assert.equal(calculateExpression('0 / 3'), '0');
-    assert.equal(calculateExpression('0 * 3'), '0');
-    // inne przypadki
-    assert.equal(calculateExpression('0 / 0'), 'error');
-    assert.equal(calculateExpression('1 + 2 + sqrt(27) - 9 * 0 / 0'), 'error');
 
-    // testy na obsługę keybord'u - czyli szablon HTML do obsługi 
+    // priorytet działań
+    assert.deepEqual(calculateExpression('2 + 3'), 5);
+    assert.deepEqual(calculateExpression('2 + 3 * 4'), 14);
+    assert.deepEqual(calculateExpression('10 / 2 * 3'), 15);
+    assert.deepEqual(calculateExpression('6 + sqrt(9) * 3'), 15);
+    assert.deepEqual(calculateExpression('1000 - 1 * 2 + 3 / 4 - 5 ^2 * sqrt(9)'), 923.75);
+    
+    // pomijanie wadliwego inputu
+    assert.deepEqual(calculateExpression('5 +'), 5);
+    assert.deepEqual(calculateExpression('5 -'), 5);
+    assert.deepEqual(calculateExpression('5 *'), 5);
+    assert.deepEqual(calculateExpression('5 /'), 5);
+    assert.deepEqual(calculateExpression('8 + 2 +'), 10);
+    assert.deepEqual(calculateExpression('8 + 2 -'), 10);
+    assert.deepEqual(calculateExpression('8 + 2 *'), 10);
+    assert.deepEqual(calculateExpression('8 + 2 /   '), 10);
+    assert.deepEqual(calculateExpression('10 * sqrt(9) *'), 30);
+    
+    // operacje ze startowym 0
+    assert.deepEqual(calculateExpression('0 + 3'), 3);
+    assert.deepEqual(calculateExpression('0 - 3'), -3);
+    assert.deepEqual(calculateExpression('0 / 3'), 0);
+    assert.deepEqual(calculateExpression('0 * 3'), 0);
+
+    // inne przypadki
+    assert.deepEqual(calculateExpression('0 / 0'), 'error');
+    assert.deepEqual(calculateExpression('1 + 2 + sqrt(27) - 9 * 0 / 0'), 'error');
 
 });

@@ -71,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'c' || 'C':
             Calculator.setScreen('C');
             break;
-        case '=':
+        case 'Enter' || ('Shift' && '+'):
             Calculator.parseExpression();
             break;
         }
+        event.preventDefault();
     };
 
     changeViewButton.addEventListener('click',  () => {

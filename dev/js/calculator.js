@@ -197,17 +197,12 @@ const Calculator = (function () {
                     screenTop.textContent = screenTopTextContent.replace(/.?$/, input);
                     screenBottom.textContent = input;
 
-                    // ostatnie jest  potęgowanie
-                // } else if (isLastPow) {
-                //     screenTop.textContent = screenTop.textContent.replace(/(\d+)(\s\^2)$/, '$1 ' + input);
-
                 // ostatnia jest liczba lub potęgowanie/pierwiastkowanie
                 // potegowanie/pierwiastkowanie jest jednoargumentowe - po nim następuje od razu kolejny operator - stąd nie przewiduje się, aby
                 // można go było zmienić
                 } else {
                     screenTop.textContent += ' ' + input;
                     screenBottom.textContent = input;
-                        // event.preventDefault();
                 }
                 break;
             case '^':

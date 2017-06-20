@@ -1,8 +1,11 @@
 {
-  "name": "",
+  "name": "fcc",
   "version": "1.0.0",
-  "description": "",
+  "description": "free code camp challenge",
   "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
+  },
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.1.8",
@@ -21,7 +24,8 @@
     "grunt-css-clean": "^0.1.0",
     "grunt-newer": "^1.2.0",
     "grunt-sass": "^2.0.0",
-    "load-grunt-tasks": "^3.5.2"
+    "load-grunt-tasks": "^3.5.2",
+    "qunitjs": "^2.3.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/zapalagrzegorz/"
   },
-  "author": "",
+  "author": "Grzegorz Zapala <zapala.grzegorz@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zapalagrzegorz/"

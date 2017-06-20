@@ -17,11 +17,11 @@ module.exports = function (grunt) {
         watch: {
             scripts: {
                 files: ['dev/js/*.js'],
-                tasks: ['concat:dev', 'babel']
+                tasks: ['js']
             },
             sass: {
                 files: ['dev/css/*.scss'],
-                tasks: ['sass']
+                tasks: ['sass:dev']
             },
             options: {
                 spawn: false,
@@ -47,39 +47,49 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: ['build/js/*', 'build/css/*', 'build/img/*']
+            dist: ['build/js/*', 'build/css/*', 'build/img/*, dev/temp/*']
         },
         concat: {
-            // dist: {
-            //     files: {
-            //         'build/js/scripts.js' : [vendorJs, 'dev/js/main.js']
-            //     }
-            // },
             dev: {
                 files: {
-                    'build/js/vendor.js': [vendorJs],
-                    'build/js/scripts.js': ['dev/js/*.js']
+                    // 'build/js/vendor.js': [vendorJs],
+                    'dev/temp/scripts.js': ['dev/js/*.js']
+                }
+            },
+            dist: {
+                files: {
+                    // 'dev/temp/vendor.js': [vendorJs],
+                    'dev/temp/scripts.js': ['dev/js/*.js']
                 }
             }
         },
         babel: {
-            options: {
-                sourceMap: true,
-                presets: ['es2015']
-            },
             dist: {
+                options: {
+                    sourceMap: false,
+                    presets: ['es2015']
+                },
                 files: {
-                    'build/js/scripts5.js': 'build/js/scripts.js'
+                    'dev/temp/scripts5.js': 'dev/temp/scripts.js'
+                }
+            },
+            dev: {
+                options: {
+                    sourceMap: true,
+                    presets: ['es2015']
+                },
+                files: {
+                    'build/js/scripts5.js': 'dev/temp/scripts.js'
                 }
             }
         },
         uglify: {
             options: {
-                sourceMap: true
+                sourceMap: false
             },
             dist: {
                 files: {
-                    'build/js/scripts5.js.min': 'build/js/scripts5.js'
+                    'build/js/scripts.js.min': 'dev/temp/scripts5.js'
                 }
             }
         },
@@ -87,18 +97,27 @@ module.exports = function (grunt) {
             options: {
                 sourceMap: false,
                 includePaths: [
-                    'bower_components/font-awesome/scss',
+                    // 'bower_components/font-awesome/scss',
                     'bower_components/bootstrap/scss'
                 ]
             },
-            dist: {
-
+            dev: {
                 files:
                 [{
                     expand: true,
                     cwd: 'dev/css/',
                     src: ['*.scss'],
                     dest: 'build/css/',
+                    ext: '.css'
+                }]
+            },
+            dist: {
+                files:
+                [{
+                    expand: true,
+                    cwd: 'dev/css/',
+                    src: ['*.scss'],
+                    dest: 'dev/css/',
                     ext: '.css'
                 }]
             }
@@ -110,27 +129,38 @@ module.exports = function (grunt) {
                 roundingPrecision: -1
             },
             dist: {
-                files: {}
-            },
-            build: {}
+                files:
+                [{
+                    expand: true,
+                    cwd: 'dev/css/',
+                    src: ['*.css'],
+                    dest: 'build/css/',
+                    ext: '.min.css'
+                }]
+            }
         },
         imagemin: {
             dist: {
+                // files: {
+                //     'build/img/original.png': 'dev/img/original.png'
+                // }
                 files: [{
                     expand: true,                  // Enable dynamic expansion 
-                    cwd: 'img/src/',                   // Src matches are relative to this path 
-                    src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match 
-                    dest: 'dist/'
+                    cwd: 'dev/img/',                   // Src matches are relative to this path 
+                    src: ['*.{png,jpg,gif}'],   // Actual patterns to match 
+                    dest: 'build/img/'
                 }]
             }
         }
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['browserSync', 'watch']);
-    grunt.registerTask('css', ['newer:sass', 'newer:cssmin']);
-    grunt.registerTask('css-force', ['sass', 'cssmin']);
-    grunt.registerTask('js', ['concat:dev', 'newer:babel', 'newer:uglify']);
-    grunt.registerTask('img', ['newer:imagemin']);
+    grunt.registerTask('default', ['clean', 'sass:dev', 'concat:dev', 'babel:dev', 'img', 'browserSync', 'watch']);
+    grunt.registerTask('css', ['newer:sass:dist']);
+    grunt.registerTask('css-force', ['sass:dev', 'cssmin']);
+    grunt.registerTask('js', ['newer:concat', 'newer:babel']);
+    grunt.registerTask('js-force', ['concat', 'babel']);
+    grunt.registerTask('img', ['imagemin']);
+    grunt.registerTask('dist', ['clean', 'sass:dist', 'cssmin', 'concat:dist', 'babel:dist', 'uglify', 'img'])
 
 };

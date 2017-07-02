@@ -7,50 +7,55 @@
     <title>FCC Calculator</title>
     <meta name="description" content="Free Code Camp challange - calculator">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--<link rel="stylesheet" href="build/css/style.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Rationale" rel="stylesheet">
     <link rel="stylesheet" href="build/css/main.css">
-    <!--<link rel="stylesheet" href="build/css/main.min.css">-->
-
+    <style>
+        html,
+        body {
+            height: 100%;
+            background: #134E5E;
+            background: -webkit-linear-gradient(to bottom, #71B280, #134E5E);
+            background: linear-gradient(to bottom, #71B280, #134E5E);
+        }
+    </style>
 </head>
 
 <body>
     <div class="calculator-wrap">
-    <section class="container calculator calculator--traditional">
+        <section class="container calculator calculator--traditional">
 
-        <!-- medium and up-->
-        <div class="row">
-            <div class="col-sm-12 calcPanel">
-                <button href="#" class="btn calcBtnNum">1</button>
-                <button href="#" class="btn calcBtnNum">2</button>
-                <button href="#" class="btn calcBtnNum">3</button>
-                <button href="#" class="btn calcBtnNum">4</button>
-                <button href="#" class="btn calcBtnNum">5</button>
-                <button href="#" class="btn calcBtnNum">6</button>
-                <button href="#" class="btn calcBtnNum">7</button>
-                <button href="#" class="btn calcBtnNum">8</button>
-                <button href="#" class="btn calcBtnNum">9</button>
-                <button href="#" class="btn calcBtnNum">0</button>
-                <button href="#" class="btn calcBtnOper">-</button>
-                <button href="#" class="btn calcBtnOper">+</button>
-                <button href="#" class="btn calcBtnOper">*</button>
-                <button href="#" class="btn calcBtnOper">/</button>
-                <button href="#" class="btn calcBtnOper">^</button>
-                <button href="#" class="btn calcBtnOper">√</button>
-                <button href="#" class="btn calcBtnEq">=</button>
-                <button href="#" class="btn calcBtnClr">C</button>
-            </div>
-            <div class="col-sm-12 screen">
-                <div class="d-flex justify-content-end screen__top">0</div>
-                <div class="d-flex justify-content-center screen__bottom">0</div>
-            </div>
+            <div class="row">
+                <div class="col-sm-12 calcPanel">
+                    <button href="#" class="btn calcBtnNum">1</button>
+                    <button href="#" class="btn calcBtnNum">2</button>
+                    <button href="#" class="btn calcBtnNum">3</button>
+                    <button href="#" class="btn calcBtnNum">4</button>
+                    <button href="#" class="btn calcBtnNum">5</button>
+                    <button href="#" class="btn calcBtnNum">6</button>
+                    <button href="#" class="btn calcBtnNum">7</button>
+                    <button href="#" class="btn calcBtnNum">8</button>
+                    <button href="#" class="btn calcBtnNum">9</button>
+                    <button href="#" class="btn calcBtnNum">0</button>
+                    <button href="#" class="btn calcBtnOper">-</button>
+                    <button href="#" class="btn calcBtnOper">+</button>
+                    <button href="#" class="btn calcBtnOper">*</button>
+                    <button href="#" class="btn calcBtnOper">/</button>
+                    <button href="#" class="btn calcBtnOper">^</button>
+                    <button href="#" class="btn calcBtnOper">√</button>
+                    <button href="#" class="btn calcBtnEq">=</button>
+                    <button href="#" class="btn calcBtnClr">C</button>
+                </div>
+                <div class="col-sm-12 screen">
+                    <div class="d-flex justify-content-end screen__top">0</div>
+                    <div class="d-flex justify-content-center screen__bottom">0</div>
+                </div>
 
-        </div>
-        <button class="btn changeViewBtn" id="changeViewBtn"></button>
-    </section>
+            </div>
+            <button class="btn changeViewBtn" id="changeViewBtn"></button>
+        </section>
     </div>
 
-    <script src="build/js/scripts5.js"></script>
+    <script src="build/js/scripts.js.min"></script>
 </body>
 
 </html>

@@ -1,15 +1,14 @@
 // @ts-check 
-// do the type check with jsDoc 
-'use strict';
-
 
 document.addEventListener('DOMContentLoaded', function () {
+    'use strict';
 
     /************ ELEMENTY ******/
-
+    let calculator = document.querySelector('.calculator');
     let calcPanel = document.querySelector('.calcPanel');
     let equalButton = document.querySelector('.calcBtnEq');
     let changeViewButton = document.querySelector('.changeViewBtn');
+
 
     /************ ZDARZENIA ******/
 
@@ -78,9 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
     };
 
-    changeViewButton.addEventListener('click',  () => {
-        let calculator = document.querySelector('.calculator');
-        calculator.classList.toggle('calculator--traditional');
-        calculator.classList.toggle('calculator--original');
+    changeViewButton.addEventListener('click', () => {
+        if (window.innerWidth > 600) {
+            calculator.classList.toggle('calculator--traditional');
+            calculator.classList.toggle('calculator--original');
+        }
     });
 });

@@ -1,211 +1,260 @@
-html,
-body {
-    height: 100%;
-    background: #134E5E;
-    background: -webkit-linear-gradient(to bottom, #71B280, #134E5E);
-    background: linear-gradient(to bottom, #71B280, #134E5E);
-}
+    html,
+    body {
+        height: 100%;
+        background: #134E5E;
+        background: -webkit-linear-gradient(to bottom, #71B280, #134E5E);
+        background: linear-gradient(to bottom, #71B280, #134E5E);
+    }
 
-.calculator {
-    max-width: 500px;
-    .btn {
-        width: 43px;
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+    .calculator-wrap {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
-    .btn:focus {
-        outline-color: green;
-        outline-style: hidden;
-        outline-width: 1px;
-    }
-    .calcPanel {
-        position: relative;
-        margin-top: 1rem;
-        color: white;
+
+    .calculator {
+        /* padding-top: 11px; */
+        margin-top: 3rem;
+        border-radius: 12px;
+        max-width: 455px;
         .btn {
-            color: inherit;
-            transition: .4s;
-            &:active {
-                box-shadow: none;
-                transform: translateY(2px);
+            width: 43px;
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+        }
+        .btn:focus {
+            outline-color: green;
+            outline-style: hidden;
+            outline-width: 1px;
+        }
+        .calcPanel {
+            position: relative;
+            margin-top: 1rem;
+            color: white;
+            .btn {
+                color: inherit;
+                transition: .4s;
+                &:active {
+                    box-shadow: none;
+                    transform: translateY(2px);
+                }
+            }
+            .calcBtnNum {
+                background-color: #b29571;
+                margin-bottom: 0.2rem;
+            }
+            .calcBtnClr {
+                background-color: indianred;
+            }
+            .calcBtnEq {
+                background-color: indigo;
+            }
+            .calcBtnOper {
+                background-color: #7971b2;
             }
         }
-        .calcBtnNum {
-            background-color: #b29571;
-            margin-bottom: 0.2rem;
+        .screen {
+            margin-top: 1rem;
+            color: white;
+            .screen__top,
+            .screen__bottom {
+                min-height: 2rem;
+                border: 1px solid black;
+            }
+            .screen__top {
+                color: inherit;
+                width: 90%;
+                top: 12px;
+                margin: auto;
+                border: 0;
+                font-size: 0.7rem;
+                line-height: 2;
+            }
+            .screen__bottom {
+                color: inherit;
+                width: 80%;
+                margin: auto;
+                border: 0;
+                line-height: 32px;
+            }
         }
-        .calcBtnClr {
-            background-color: indianred;
+        @media (max-width: 600px) {
+            .changeViewBtn {
+                display: none;
+            }
         }
-        .calcBtnEq {
-            background-color: indigo;
-        }
-        .calcBtnOper {
-            background-color: #7971b2;
-        }
+        
     }
-    .screen {
-        margin-top: 1rem;
-        color: white;
-        .screen__top,
-        .screen__bottom {
-            min-height: 2rem;
-            border: 1px solid black;
-        }
-        .screen__top {
-            color: inherit;
-            width: 90%;
-            top: 12px;
-            margin: auto;
-            border: 0;
-            font-size: 0.7rem;
-            line-height: 2;
-        }
-        .screen__bottom {
-            color: inherit;
-            width: 80%;
-            margin: auto;
-            border: 0;
-            line-height: 32px;
-        }
-    }
-}
 
-.calculator--traditional {
-    transition: 1s;
-    .screen {
-        position: static;
+    .calculator--traditional {
         transition: 1s;
+        padding-bottom: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid white;
+        .screen {
+            position: static;
+            transition: 1s;
+        }
+        .calcPanel {
+            order: 1;
+            transition: 1s;
+        }
+        .changeViewBtn {
+            transition: 1s;
+            margin-top: .1rem;
+            background-image: url(../img/original.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 38px;
+            height: 38px;
+            background-position: -8px 0px;
+        }
+        @media (max-width: 1024px){
+            .btn, .calcPanel .calcBtnNum {
+                width: 60px;
+                margin-right: 1rem;
+                margin-bottom: 1rem;
+            }
+            .changeViewBtn {
+                background-position: 0 0;
+            }
+        }
     }
-    .calcPanel {
-        order: 1;
-        transition: 1s;
-    }
-    .changeViewBtn {
-        transition: 1s;
-        margin-top: .1rem;
-        background-image: url(../img/original.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 38px;
-        height: 38px;
-        background-position: -8px 0px;
-    }
-}
 
-.calculator--original {
-    transition: 1s;
-    &>.row {
-        position: relative;
-        min-height: 400px;
-        top: -55px;
-        transition: inherit;
-    }
-    .screen {
-        transition: inherit;
-        max-height: 82px;
-        overflow-y: auto;
-        position: absolute;
-        top: 48%;
-        left: 19%;
-        width: 60%;
-        margin: 0 auto;
-        border: 1px white solid;
-        border-radius: 35px;
-    }
-    .calcPanel {
-        .calcBtnNum,
-        .calcBtnOper,
-        .btn {
+    .calculator--original {
+        transition: 1s;
+        &>.row {
+            position: relative;
+            min-height: 400px;
+            top: -55px;
+            transition: inherit;
+        }
+        .screen {
+            transition: inherit;
+            max-height: 82px;
+            overflow-y: auto;
             position: absolute;
+            top: 48%;
+            left: 19%;
+            width: 60%;
+            margin: 0 auto;
+            border: 1px white solid;
+            border-radius: 35px;
         }
-        .calcBtnNum:nth-of-type(1) {
-            top: 180px;
+        .calcPanel {
+            .calcBtnNum,
+            .calcBtnOper,
+            .btn {
+                position: absolute;
+            }
+            .calcBtnNum:nth-of-type(1) {
+                top: 180px;
+                left: 0;
+            }
+            .calcBtnNum:nth-of-type(2) {
+                top: 150px;
+                left: 50px;
+            }
+            .calcBtnNum:nth-of-type(3) {
+                top: 130px;
+                left: 100px;
+            }
+            .calcBtnNum:nth-of-type(4) {
+                top: 120px;
+                left: 150px;
+            }
+            .calcBtnNum:nth-of-type(5) {
+                top: 110px;
+                left: 200px;
+            }
+            .calcBtnNum:nth-of-type(6) {
+                top: 110px;
+                left: 250px;
+            }
+            .calcBtnNum:nth-of-type(7) {
+                top: 120px;
+                left: 300px;
+            }
+            .calcBtnNum:nth-of-type(8) {
+                top: 130px;
+                left: 350px;
+            }
+            .calcBtnNum:nth-of-type(9) {
+                top: 150px;
+                left: 400px;
+            }
+            .calcBtnNum:nth-of-type(10) {
+                left: 450px;
+                right: 0;
+                top: 180px;
+            }
+            .calcBtnOper:nth-of-type(11) {
+                left: 0;
+                top: 222px;
+            }
+            .calcBtnOper:nth-of-type(12) {
+                top: 272px;
+                left: 83px;
+                left: calc(29.5px + 43px);
+            }
+            .calcBtnOper:nth-of-type(13) {
+                top: 300px;
+                left: calc(29.5px + 59px + 43px * 2);
+            }
+            .calcBtnOper:nth-of-type(14) {
+                top: 300px;
+                left: calc(29.5px + 59px * 2 + 43px * 3);
+            }
+            .calcBtnOper:nth-of-type(15) {
+                top: 272px;
+                left: calc(29.5px + 59px * 3 + 43px * 4);
+            }
+            .calcBtnOper:nth-of-type(16) {
+                top: 222px;
+                left: 450px;
+            }
+            .calcBtnEq:nth-of-type(17) {
+                top: 253px;
+                left: 160px;
+                width: 80px;
+            }
+            .calcBtnClr:nth-of-type(18) {
+                top: 253px;
+                left: 250px;
+                width: 80px;
+            }
+        }
+        .changeViewBtn {
+            width: 70px;
+            height: 40px;
+            background-image: url(../img/traditional.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position-x: -37px;
+            background-position-y: 0px;
+            position: absolute;
+            top: 330px;
             left: 0;
         }
-        .calcBtnNum:nth-of-type(2) {
-            top: 150px;
-            left: 50px;
-        }
-        .calcBtnNum:nth-of-type(3) {
-            top: 130px;
-            left: 100px;
-        }
-        .calcBtnNum:nth-of-type(4) {
-            top: 120px;
-            left: 150px;
-        }
-        .calcBtnNum:nth-of-type(5) {
-            top: 110px;
-            left: 200px;
-        }
-        .calcBtnNum:nth-of-type(6) {
-            top: 110px;
-            left: 250px;
-        }
-        .calcBtnNum:nth-of-type(7) {
-            top: 120px;
-            left: 300px;
-        }
-        .calcBtnNum:nth-of-type(8) {
-            top: 130px;
-            left: 350px;
-        }
-        .calcBtnNum:nth-of-type(9) {
-            top: 150px;
-            left: 400px;
-        }
-        .calcBtnNum:nth-of-type(10) {
-            left: 450px;
-            right: 0;
-            top: 180px;
-        }
-        .calcBtnOper:nth-of-type(11) {
-            left: 0;
-            top: 222px;
-        }
-        .calcBtnOper:nth-of-type(12) {
-            top: 272px;
-            left: 83px;
-            left: calc(29.5px + 43px);
-        }
-        .calcBtnOper:nth-of-type(13) {
-            top: 300px;
-            left: calc(29.5px + 59px + 43px * 2);
-        }
-        .calcBtnOper:nth-of-type(14) {
-            position: absolute;
-            top: 300px;
-            left: calc(29.5px + 59px * 2 + 43px * 3);
-        }
-        .calcBtnOper:nth-of-type(15) {
-            top: 272px;
-            left: calc(29.5px + 59px * 3 + 43px * 4);
-        }
-        .calcBtnOper:nth-of-type(16) {
-            top: 222px;
-            left: 450px;
-        }
-        .calcBtnEq:nth-of-type(17) {
-            top: 253px;
-            left: 160px;
-            width: 80px;
-        }
-        .calcBtnClr:nth-of-type(18) {
-            top: 253px;
-            left: 250px;
-            width: 80px;
+        @media (max-width: 600px) {
+            &>.row {
+                position: static;
+                min-height: 0
+            }
+            .screen {
+                position: static;
+                transition: 1s;
+            }
+            .calcPanel {
+                order: 1;
+                transition: 1s;
+                position: static;
+            }
+            .calcPanel .calcBtnNum,
+            .calcPanel .calcBtnOper,
+            .calcPanel .btn {
+                position: static;
+            }
         }
     }
-    .changeViewBtn {
-        width: 70px;
-        height: 40px;
-        background-image: url(../img/traditional.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position-x: -37px;
-        background-position-y: 0px;
-        position: absolute;
-        top: 330px;
-        left: 0;
-    }
-}

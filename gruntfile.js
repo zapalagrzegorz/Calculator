@@ -6,12 +6,10 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // Tablica zawierająca zewnętrzne javascripty, które chcemy konkatenować do vendor.js
-    var vendorJs = [
-        // 'bower_components/jquery/dist/jquery.min.js',
-        // 'bower_components/tether/dist/js/tether.min.js',
-        // 'bower_components/bootstrap/js/dist/util.js',
-        // 'bower_components/bootstrap/js/dist/collapse.js'
-    ];
+    // var vendorJs = [
+    //     // 'bower_components/jquery/dist/jquery.min.js',
+    //     // 'bower_components/bootstrap/js/dist/util.js',
+    // ];
     // Project configuration.
     grunt.initConfig({
         watch: {
@@ -47,7 +45,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: ['build/js/*', 'build/css/*', 'build/img/*, dev/temp/*']
+            build: ['build/**/*'],
+            dev_temp: ['dev/temp/']
         },
         concat: {
             dev: {
@@ -67,19 +66,19 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     sourceMap: false,
-                    presets: ['es2015']
+                    presets: ['env']
                 },
                 files: {
-                    'dev/temp/scripts5.js': 'dev/temp/scripts.js'
+                    'dev/temp/scriptsEs5.js': 'dev/temp/scripts.js'
                 }
             },
             dev: {
                 options: {
                     sourceMap: true,
-                    presets: ['es2015']
+                    presets: ['env']
                 },
                 files: {
-                    'build/js/scripts5.js': 'dev/temp/scripts.js'
+                    'build/js/scriptsEs5.js': 'dev/temp/scripts.js'
                 }
             }
         },
@@ -89,7 +88,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'build/js/scripts.js.min': 'dev/temp/scripts5.js'
+                    'build/js/scripts.js.min': 'dev/temp/scriptsEs5.js'
                 }
             }
         },
@@ -117,33 +116,26 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'dev/css/',
                     src: ['*.scss'],
-                    dest: 'dev/css/',
+                    dest: 'build/css/',
                     ext: '.css'
                 }]
             }
         },
-        cssmin: {
+        postcss: {
             options: {
-                sourceMap: false,
-                mergeIntoShorthands: false,
-                roundingPrecision: -1
+                map: false,
+                processors: [
+                    require('pixrem')(), // add fallbacks for rem units
+                    require('autoprefixer')({ browsers: 'last 2 versions' }), // add vendor prefixes
+                    require('cssnano')() // minify the result
+                ]
             },
             dist: {
-                files:
-                [{
-                    expand: true,
-                    cwd: 'dev/css/',
-                    src: ['*.css'],
-                    dest: 'build/css/',
-                    ext: '.min.css'
-                }]
+                src: 'build/css/main.css'
             }
         },
         imagemin: {
             dist: {
-                // files: {
-                //     'build/img/original.png': 'dev/img/original.png'
-                // }
                 files: [{
                     expand: true,                  // Enable dynamic expansion 
                     cwd: 'dev/img/',                   // Src matches are relative to this path 
@@ -152,15 +144,10 @@ module.exports = function (grunt) {
                 }]
             }
         }
-    });
+});
 
-    // Default task(s).
-    grunt.registerTask('default', ['clean', 'sass:dev', 'concat:dev', 'babel:dev', 'img', 'browserSync', 'watch']);
-    grunt.registerTask('css', ['newer:sass:dist']);
-    grunt.registerTask('css-force', ['sass:dev', 'cssmin']);
-    grunt.registerTask('js', ['newer:concat', 'newer:babel']);
-    grunt.registerTask('js-force', ['concat', 'babel']);
-    grunt.registerTask('img', ['imagemin']);
-    grunt.registerTask('dist', ['clean', 'sass:dist', 'cssmin', 'concat:dist', 'babel:dist', 'uglify', 'img'])
+// Default task(s).
+grunt.registerTask('default', ['clean', 'sass:dev', 'concat:dev', 'babel:dev', 'imagemin', 'browserSync', 'watch']);
+grunt.registerTask('dist', ['clean', 'sass:dist', 'postcss', 'concat:dist', 'babel:dist', 'uglify', 'clean:dev_temp', 'imagemin'])
 
 };

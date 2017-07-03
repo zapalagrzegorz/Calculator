@@ -146,6 +146,6 @@ module.exports = function (grunt) {
 
 // Default task(s).
 grunt.registerTask('default', ['clean', 'sass:dev', 'concat:dev', 'babel:dev', 'imagemin', 'browserSync', 'watch']);
-grunt.registerTask('dist', ['clean', 'sass:dist', 'postcss', 'concat:dist', 'babel:dist', 'uglify', 'clean:dev_temp', 'imagemin'])
+grunt.registerTask('dist', ['clean', 'imagemin', 'sass:dist', 'postcss', 'concat:dist', 'babel:dist', 'uglify', 'clean:dev_temp', ])
 
 };

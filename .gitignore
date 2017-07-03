@@ -9,3 +9,5 @@ build/*/**
 /CNAME
 /todo
 /dev/js/jsconfig.json
+/.vscode
+/.vscode/settings.json

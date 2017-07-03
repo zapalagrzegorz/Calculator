@@ -11,3 +11,4 @@ build/*/**
 /dev/js/jsconfig.json
 /.vscode
 /.vscode/settings.json
+/dev/css/main.css

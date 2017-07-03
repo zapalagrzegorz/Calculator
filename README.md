@@ -9,5 +9,5 @@ You can:
 - clear the input field with a clear button.
 - keep chaining mathematical operations together, and the calculator will tell you on the fly the correct output
 - change layout to a fantasy-like
-- see it here: calculatorfcc.surge.sh(http://calculatorfcc.surge.sh/) thanks to [surge](http://surge.sh/)
+- see it: [GitHub Pages](https://zapalagrzegorz.github.io/FCC_calculator/) or (Surge)(http://calculatorfcc.surge.sh/) thanks to [surge](http://surge.sh/)
 

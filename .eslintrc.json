@@ -30,7 +30,6 @@
         "comma-spacing": ["error"],
         "brace-style": ["error", "1tbs"],
         "space-before-blocks": ["error"],
-        // wyświetlanie obiektów w odrębnych liniach - wąsów i properties
         "object-curly-newline": ["error", {
              "minProperties" : 1,
              "multiline": true

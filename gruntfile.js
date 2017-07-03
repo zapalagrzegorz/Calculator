@@ -1,5 +1,3 @@
-// TO DO: css min
-
 module.exports = function (grunt) {
 
     // Load the plugins tasks 
@@ -131,7 +129,7 @@ module.exports = function (grunt) {
                 ]
             },
             dist: {
-                src: 'build/css/main.css'
+                src: 'build/css/main.min.css'
             }
         },
         imagemin: {

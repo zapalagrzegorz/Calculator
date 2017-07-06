@@ -86,7 +86,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'build/js/scripts.js.min': 'dev/temp/scriptsEs5.js'
+                    'build/js/scripts.min.js': 'dev/temp/scriptsEs5.js'
                 }
             }
         },
@@ -129,7 +129,8 @@ module.exports = function (grunt) {
                 ]
             },
             dist: {
-                src: 'build/css/main.min.css'
+               src: 'build/css/main.css',
+                dest: 'build/css/main.min.css'
             }
         },
         imagemin: {

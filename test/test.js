@@ -114,7 +114,12 @@ function calculateExpression (expression) {
         }
         i++;
     }
-    return Number(queueOutputCalc[0]);
+
+    var num = (Number(queueOutputCalc[0]));
+    if (num % 1 === 0) {
+        return num;
+    }
+    return Number(num.toFixed(2));
 }
 
 
@@ -139,6 +144,7 @@ QUnit.test('calculation test', function (assert) {
     assert.deepEqual(calculateExpression('8 + 2 *'), 10);
     assert.deepEqual(calculateExpression('8 + 2 /   '), 10);
     assert.deepEqual(calculateExpression('10 * sqrt(9) *'), 30);
+    assert.deepEqual(calculateExpression('5 / 10 - 4 / 10'), 0.1);
     
     // operacje ze startowym 0
     assert.deepEqual(calculateExpression('0 + 3'), 3);

@@ -143,7 +143,9 @@ const Calculator = (function () {
             }
             i++;
         }
-
+        if (queueOutputCalc[0] % 1 !== 0) {
+            queueOutputCalc[0] = Number(queueOutputCalc[0].toFixed(2));
+        }
         // odczytanie
         screenBottom.textContent = String(queueOutputCalc[0]);
         if (isfinal) {
@@ -197,9 +199,9 @@ const Calculator = (function () {
                     screenTop.textContent = screenTopTextContent.replace(/.?$/, input);
                     screenBottom.textContent = input;
 
-                // ostatnia jest liczba lub potęgowanie/pierwiastkowanie
-                // potegowanie/pierwiastkowanie jest jednoargumentowe - po nim następuje od razu kolejny operator - stąd nie przewiduje się, aby
-                // można go było zmienić
+                        // ostatnia jest liczba lub potęgowanie/pierwiastkowanie
+                        // potegowanie/pierwiastkowanie jest jednoargumentowe - po nim następuje od razu kolejny operator - stąd nie przewiduje się, aby
+                        // można go było zmienić
                 } else {
                     screenTop.textContent += ' ' + input;
                     screenBottom.textContent = input;
@@ -209,13 +211,13 @@ const Calculator = (function () {
                     // po potędze nie ma podmiany na pierwiastek
                 if (isLastSqrt || /(sqrt\(\d+\)\s*\W)$/.test(screenTopTextContent)) {
                     return;
-                    
-                // ostatni jest operator
+
+                        // ostatni jest operator
                 } else if (!isLastNum) {
                     screenTop.textContent = screenTopTextContent.replace(lastChar, input + '2');
                     screenBottom.textContent = input + '2';
 
-                // ostatnia jest liczba 
+                        // ostatnia jest liczba 
                 } else {
                     screenTop.textContent += ' ' + input + '2';
                     screenBottom.textContent = input + '2';
@@ -223,20 +225,20 @@ const Calculator = (function () {
                 break;
             case '√':
                     // nie ma pierwiastka z pierwiastka
-                if (isLastSqrt ) {
+                if (isLastSqrt) {
                     return;
 
                 } else if (isLastPow || /(\d+\s\^2\s\W)$/.test(screenTopTextContent)) {
-                    // nie ma podmiany dla innych operatorów, to tutaj konsekwetnie też nie, 
-                    // nie można przy tym zmienić bo jest jednoargumentowy
+                        // nie ma podmiany dla innych operatorów, to tutaj konsekwetnie też nie, 
+                        // nie można przy tym zmienić bo jest jednoargumentowy
                     return;
-                   
+
 
 
                         // właściwe pierwiastkowaniel; wiodąca spacja, bo nie ma już zamiany pierwiastka na inny operator
                 } else if (isLastNum) {
                     screenTop.textContent = screenTopTextContent.replace(/(\d+)$/, 'sqrt(' + '$1' + ') ');
-                    // return;
+                        // return;
                 } else {
 
                         // zamiana operatora i cyfry na pierwiastek; 
@@ -263,7 +265,7 @@ const Calculator = (function () {
                 screenBottom.textContent = input;
 
                 // podana cyfra nie jest 'bezpieczna'
-            } else if (!Number.isSafeInteger(Number(screenBottom.textContent))) {
+            } else if (!Number.isFinite(Number(screenBottom.textContent))) {
                 screenBottom.textContent = 'Error';
                 screenTop.textContent = '0';
 

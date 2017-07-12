@@ -1,4 +1,4 @@
-FCC Calculator
+Calculator
 ===========================
 [Free Code Camp challenge](https://www.freecodecamp.com/challenges/build-a-javascript-calculator/) to make custom calculator with expression parser
 --------------------------
@@ -10,4 +10,3 @@ You can:
 - keep chaining mathematical operations together, and the calculator will tell you on the fly the correct output
 - change layout to a fantasy-like
 - see it on [Surge.sh](http://calculatorfcc.surge.sh/) thanks to [surge](http://surge.sh/)
-

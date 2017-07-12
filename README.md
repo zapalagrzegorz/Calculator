@@ -1,13 +1,15 @@
 FCC Calculator
 ===========================
-[Free Code Camp challenge](https://www.freecodecamp.com/challenges/build-a-javascript-calculator/) to make custom calculator with expression parser
+[Free Code Camp challenge](https://www.freecodecamp.org/challenges/build-a-pomodoro-clock) to make simple alarm-like app
 --------------------------
+Set an alarm, and enjoy the content of the Internet. Once the times will have elapsed, the alarm will go off producing water foghorn sound in a loop reminding you about reason you set it.
 
 You can:
-- add, subtract, multiply and divide two numbers.
-- power and square root a number
-- clear the input field with a clear button.
-- keep chaining mathematical operations together, and the calculator will tell you on the fly the correct output
-- change layout to a fantasy-like
-- see it on [Surge.sh](http://calculatorfcc.surge.sh/) thanks to [surge](http://surge.sh/)
+- set the timer minutes and seconds
+- stop for a while or reset
+
+Features:
+- no css framework
+- vanillaJs
+- external audio library bundled with browserify
 

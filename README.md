@@ -1,4 +1,4 @@
-FCC_pomodoro_clock
+Calculator
 ===========================
 [Free Code Camp challenge](https://www.freecodecamp.com/challenges/build-a-javascript-calculator/) to make custom calculator with expression parser
 --------------------------

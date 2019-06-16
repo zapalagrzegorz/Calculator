@@ -8,17 +8,13 @@ html {
 
 /* ==========================================================================
    Bootstrap 
-   ========================================================================== */
+   ========================================================================== */\
+
+@import "functions";
 @import "variables";
 @import "mixins";
-// @import "custom";
-
-// Reset and dependencies
-// @import "normalize";
-// @import "print";
-
-// Core CSS
-// @import "reboot";
+@import "root";
+@import "reboot";
 // @import "type";
 // @import "images";
 // @import "code";
@@ -26,8 +22,6 @@ html {
 // @import "tables";
 // @import "forms";
 // @import "buttons";
-
-// Components
 // @import "transitions";
 // @import "dropdown";
 // @import "button-group";
@@ -44,17 +38,15 @@ html {
 // @import "progress";
 // @import "media";
 // @import "list-group";
-// @import "responsive-embed";
 // @import "close";
-
-// Components w/ JavaScript
+// @import "toasts";
 // @import "modal";
 // @import "tooltip";
 // @import "popover";
 // @import "carousel";
-
-// Utility classes
+// @import "spinners";
 // @import "utilities";
+// @import "print";
 
 
 /* ==========================================================================

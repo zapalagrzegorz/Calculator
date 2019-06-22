@@ -9,4 +9,4 @@ You can:
 - clear the input field with a clear button.
 - keep chaining mathematical operations together, and the calculator will tell you on the fly the correct output
 - change layout to a fantasy-like
-- see it on [Surge.sh](http://calculatorfcc.surge.sh/)
+- [online](http://calculatorfcc.surge.sh/)
